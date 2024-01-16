@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ServiceExporter {
-    String value() default "";
+public @interface RpcService {
+    Class<?> value();
+    String version() default "";
 }
-
