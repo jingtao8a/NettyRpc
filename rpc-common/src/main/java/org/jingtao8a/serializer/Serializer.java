@@ -1,8 +1,9 @@
 package org.jingtao8a.serializer;
 
 import org.jingtao8a.consts.enums.SerializerTypeEnum;
+import org.jingtao8a.extension.SPI;
 
-
+@SPI(value="kryo")
 public interface Serializer {
     SerializerTypeEnum getSerializerAlgorithm();
 

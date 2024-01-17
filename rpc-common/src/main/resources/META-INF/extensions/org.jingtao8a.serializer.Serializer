@@ -1,0 +1,3 @@
+hessian=org.jingtao8a.serializer.hessian.HessianSerializer
+kryo=org.jingtao8a.serializer.kryo.KryoSerializer
+protostuff=org.jingtao8a.serializer.protostuff.ProtostuffSerializer
