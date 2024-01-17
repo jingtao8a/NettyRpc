@@ -1,9 +1,8 @@
 package org.jingtao8a.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.io.Serializable;
 
 /**
  * 自定义协议
@@ -26,7 +25,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class RpcMessage {
+@ToString
+public class RpcMessage implements Serializable {
     /* 消息类型 */
     private byte messageType;
     /* 序列化类型 */
