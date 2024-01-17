@@ -1,7 +1,7 @@
 package org.jingtao8a.register.zk;
 
 import org.apache.curator.framework.CuratorFramework;
-import org.jingtao8a.consts.enums.RpcResponseErrorMsgEnum;
+import org.jingtao8a.consts.enums.RpcErrorMsgEnum;
 import org.jingtao8a.exception.RpcException;
 import org.jingtao8a.register.Register;
 
@@ -31,7 +31,7 @@ public class ZkRegister implements Register {
         //从注册中心拿到该rpcService下的所有server的Address
         List<String> serviceUrlList = CuratorUtils.getChildrenNodes(zkClient, serviceKey);
         if (serviceUrlList.isEmpty()) {
-            throw new RpcException(RpcResponseErrorMsgEnum.SERVICE_CAN_NOT_BE_FOUND, serviceKey);
+            throw new RpcException(RpcErrorMsgEnum.SERVICE_CAN_NOT_BE_FOUND, serviceKey);
         }
         return serviceUrlList;
     }

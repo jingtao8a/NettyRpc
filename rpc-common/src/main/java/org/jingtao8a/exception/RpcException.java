@@ -1,13 +1,13 @@
 package org.jingtao8a.exception;
 
-import org.jingtao8a.consts.enums.RpcResponseErrorMsgEnum;
+import org.jingtao8a.consts.enums.RpcErrorMsgEnum;
 
 public class RpcException extends RuntimeException{
-    public RpcException(RpcResponseErrorMsgEnum rpcResponseErrorMsgEnum, String detail) {
+    public RpcException(RpcErrorMsgEnum rpcResponseErrorMsgEnum, String detail) {
         super(rpcResponseErrorMsgEnum.getMessage() + ":" + detail);
     }
 
-    public RpcException(RpcResponseErrorMsgEnum rpcExceptionErrorMsgEnum) {
+    public RpcException(RpcErrorMsgEnum rpcExceptionErrorMsgEnum) {
         super(rpcExceptionErrorMsgEnum.getMessage());
     }
 }

@@ -13,4 +13,11 @@
         <module>rpc-common</module>
         <module>rpc-server</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.42.Final</version>
+        </dependency>
+    </dependencies>
 </project>

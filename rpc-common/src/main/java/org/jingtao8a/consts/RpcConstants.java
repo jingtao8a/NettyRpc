@@ -15,5 +15,6 @@ public class RpcConstants {
     public static int HEAD_LENGTH = 16;
     public static int MAX_FRAME_LENGTH = 8 * 1024 * 1024;
 
-
+    public static String PING = "ping";
+    public static String PONG = "pong";
 }
