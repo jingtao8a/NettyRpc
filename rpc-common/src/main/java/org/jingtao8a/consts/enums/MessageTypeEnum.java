@@ -1,8 +1,8 @@
 package org.jingtao8a.consts.enums;
 
-public enum MessageTypeEnum {
-    REQUEST_TYPE,
-    RESPONSE_TYPE,
-    HEARTBEAT_REQUEST_TYPE,
-    HEARTBEAT_RESPONSE_TYPE,
+public class MessageTypeEnum {
+    public static final byte REQUEST_TYPE = 0;
+    public static final byte RESPONSE_TYPE = 1;
+    public static final byte HEARTBEAT_REQUEST_TYPE = 2;
+    public static final byte HEARTBEAT_RESPONSE_TYPE = 3;
 }
