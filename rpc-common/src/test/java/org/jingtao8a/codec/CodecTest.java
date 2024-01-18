@@ -16,7 +16,7 @@ public class CodecTest {
         RpcCodec rpcCodec = new RpcCodec();
         RpcMessage rpcMessage = new RpcMessage(MessageTypeEnum.RESPONSE_TYPE, SerializerTypeEnum.KRYO.getCode(),
                 (byte)0, 1234,
-                new RpcResponse(RpcResponseCodeEnum.SUCCESS.getCode(), RpcResponseCodeEnum.SUCCESS.getMessage(), "success"));
+                new RpcResponse("1234", RpcResponseCodeEnum.SUCCESS.getCode(), RpcResponseCodeEnum.SUCCESS.getMessage(), "success"));
         ByteBuf byteBuf = Unpooled.buffer(2560);
         rpcCodec.encode(rpcMessage, byteBuf);
         RpcMessage res = (RpcMessage) rpcCodec.decode(byteBuf);

@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 public class RpcResponse implements Serializable {
+    private String requestId;
 
     /* response code */
     private Integer code;

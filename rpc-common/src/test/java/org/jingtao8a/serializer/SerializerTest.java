@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SerializerTest {
     private static RpcMessage buildMessage() {
-        RpcResponse rpcResponse = new RpcResponse(SUCCESS.getCode(), SUCCESS.getMessage(), new String("我是结果，我是结果，我是结果"));
+        RpcResponse rpcResponse = new RpcResponse("1234", SUCCESS.getCode(), SUCCESS.getMessage(), new String("我是结果，我是结果，我是结果"));
         RpcMessage rpcMessage = new RpcMessage(MessageTypeEnum.RESPONSE_TYPE, SerializerTypeEnum.KRYO.getCode(), (byte) 0, 1, rpcResponse);
         return rpcMessage;
 
