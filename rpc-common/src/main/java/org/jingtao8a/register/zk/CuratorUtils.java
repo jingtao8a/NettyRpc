@@ -27,7 +27,7 @@ public class CuratorUtils {
     private static final Set<String> REGISTERED_PATH_SET = ConcurrentHashMap.newKeySet();
     private static CuratorFramework zkClient;
 
-    private CuratorUtils() {}
+    private CuratorUtils() {}//不可构造对象
 
     /***
      * 创建持久化节点

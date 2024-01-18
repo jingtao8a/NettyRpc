@@ -14,6 +14,12 @@ public class ZkRegister implements Register {
     public ZkRegister(String address) {
         this.zkClient = CuratorUtils.getZkClient(address);
     }
+
+    /**
+     *
+     * @param rpcServiceName 服务名称
+     * @param inetSocketAddress 服务器开放的地址
+     */
     @Override
     public void registerService(String rpcServiceName, InetSocketAddress inetSocketAddress) {
         String servicePath = CuratorUtils.ZK_REGISTER_ROOT_PATH + "/" + rpcServiceName + inetSocketAddress.toString();
