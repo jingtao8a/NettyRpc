@@ -1,9 +1,8 @@
-package org.jingtao8a.core;
+package org.jingtao8a.client.core;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.protostuff.Rpc;
 import org.jingtao8a.codec.RpcDecoder;
 import org.jingtao8a.codec.RpcEncoder;
 

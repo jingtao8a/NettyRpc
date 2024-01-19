@@ -58,6 +58,9 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcMessage> 
         });
     }
 
+    /**
+     * 15s没有收到客户端请求，直接关闭连接
+     */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {

@@ -1,4 +1,4 @@
-package org.jingtao8a.core;
+package org.jingtao8a.client.core;
 
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;

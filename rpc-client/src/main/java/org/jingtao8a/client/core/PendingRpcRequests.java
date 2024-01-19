@@ -1,6 +1,6 @@
-package org.jingtao8a.core;
+package org.jingtao8a.client.core;
 
-import org.jingtao8a.async.RpcFuture;
+import org.jingtao8a.client.async.RpcFuture;
 import org.jingtao8a.dto.RpcResponse;
 
 import java.util.Map;

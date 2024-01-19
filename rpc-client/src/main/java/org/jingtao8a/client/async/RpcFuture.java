@@ -1,4 +1,4 @@
-package org.jingtao8a.async;
+package org.jingtao8a.client.async;
 
 import org.jingtao8a.dto.RpcResponse;
 
