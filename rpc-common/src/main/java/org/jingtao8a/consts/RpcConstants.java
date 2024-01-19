@@ -17,4 +17,8 @@ public class RpcConstants {
 
     public static String PING = "ping";
     public static String PONG = "pong";
+    /**
+     *  客户端重连次数
+     */
+    public static int MAX_RETRY = 5;
 }
