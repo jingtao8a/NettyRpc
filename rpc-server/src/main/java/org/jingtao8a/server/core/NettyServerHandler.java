@@ -34,7 +34,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcMessage> 
             // 根据请求参数，找到对应的服务，反射执行方法
             Object result = handle(rpcRequest);
             log.info("server get result {} ", result.toString());
-            rpcMessage.setMessageType(MessageTypeEnum.HEARTBEAT_RESPONSE_TYPE);
+            rpcMessage.setMessageType(MessageTypeEnum.RESPONSE_TYPE);
             if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()) {
                 RpcResponse rpcResponse = new RpcResponse(rpcRequest.getRequestId(), RpcResponseCodeEnum.SUCCESS.getCode(), RpcResponseCodeEnum.SUCCESS.getMessage(), result);
                 rpcMessage.setBody(rpcResponse);
