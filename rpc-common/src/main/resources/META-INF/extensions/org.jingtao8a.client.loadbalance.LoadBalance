@@ -1,0 +1,3 @@
+random=org.jingtao8a.client.loadbalance.loadbalancer.RandomLoadBalance
+full-round=org.jingtao8a.client.loadbalance.loadbalancer.FullRoundLoadBalance
+consistent-hash=org.jingtao8a.client.loadbalance.loadbalancer.ConsistentHashLoadBalance
