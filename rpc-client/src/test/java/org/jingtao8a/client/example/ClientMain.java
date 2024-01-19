@@ -44,5 +44,8 @@ public class ClientMain {
         String res = helloService.hello(new Hello("yxt", "jingtao8a"));
 
         System.out.println(res);
+
+        res = helloService.hello(new Hello("yxt", "yuxintao"));
+        System.out.println(res);
     }
 }
