@@ -3,6 +3,7 @@ package org.jingtao8a.client.core;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jingtao8a.client.async.ResponseCallback;
@@ -29,6 +30,7 @@ public class NettyClient {
     public NettyClient() {
         eventLoopGroup = new NioEventLoopGroup();
         bootstrap = new Bootstrap()
+                .channel(NioSocketChannel.class)
                 .group(eventLoopGroup)
                 // 连接超时时间
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
@@ -132,20 +134,23 @@ public class NettyClient {
     @SneakyThrows
     public CompletableFuture<Channel> doConnect(CompletableFuture<Channel> completableFuture, InetSocketAddress inetSocketAddress, int retry) {
         log.info("inetSocketAddress [{}]", inetSocketAddress.toString());
-        bootstrap.connect(inetSocketAddress).addListener(future -> {
-            if (future.isSuccess()) {
-                log.info("The client has connected [{}] successful!", inetSocketAddress.toString());
-                completableFuture.complete(((ChannelFuture) future).channel());
-            } else if (retry == 0) {
-                log.error("the number of retries expired, connect fail. address:", inetSocketAddress.toString());
-            } else {
-                // 当前是第几次重连
-                int now = RpcConstants.MAX_RETRY - retry + 1;
-                // 本次重连的时间间隔
-                int delay = 1 << now;
-                log.warn("connect fail, attempt to reconnect. retry:" + now);
-                bootstrap.config().group().schedule(() ->
-                        doConnect(completableFuture, inetSocketAddress, retry - 1), delay, TimeUnit.SECONDS);
+        bootstrap.connect(inetSocketAddress).addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                if (channelFuture.isSuccess()) {
+                    log.info("The client has connected [{}] successful!", inetSocketAddress.toString());
+                    completableFuture.complete(channelFuture.channel());
+                } else if (retry == 0) {
+                    log.error("the number of retries expired, connect fail. address:", inetSocketAddress.toString());
+                } else {
+                    // 当前是第几次重连
+                    int now = RpcConstants.MAX_RETRY - retry + 1;
+                    // 本次重连的时间间隔
+                    int delay = 1 << now;
+                    log.warn("connect fail, attempt to reconnect. retry:" + now);
+                    bootstrap.config().group().schedule(() ->
+                            doConnect(completableFuture, inetSocketAddress, retry - 1), delay, TimeUnit.SECONDS);
+                }
             }
         });
         return completableFuture;
