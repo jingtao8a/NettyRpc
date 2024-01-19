@@ -1,5 +1,8 @@
 package org.jingtao8a.register;
 
+/**
+ * 注册中心工厂
+ */
 public interface RegisterFactory {
     /***
      *
