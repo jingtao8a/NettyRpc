@@ -1,8 +1,11 @@
 package org.jingtao8a.register;
 
+import org.jingtao8a.extension.SPI;
+
 /**
  * 注册中心工厂
  */
+@SPI(value="zookeeper")
 public interface RegisterFactory {
     /***
      *

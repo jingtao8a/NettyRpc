@@ -1,8 +1,10 @@
 package org.jingtao8a.client.proxy;
 
+import lombok.Setter;
 import org.jingtao8a.client.core.NettyClient;
 import org.jingtao8a.client.faultTolerantInvoker.FaultTolerantInvoker;
 import org.jingtao8a.client.loadbalance.LoadBalance;
+import org.jingtao8a.config.AllConfig;
 import org.jingtao8a.consts.RpcConstants;
 import org.jingtao8a.consts.enums.MessageTypeEnum;
 import org.jingtao8a.consts.enums.RpcErrorMsgEnum;
@@ -23,12 +25,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Setter
 public class ProxyFactory {
     private Register register;
     private NettyClient nettyClient;
     private LoadBalance loadBalance;
     private FaultTolerantInvoker faultTolerantInvoker;
-    private String serializer;
+
     private Map<String, Object> objectCache = new HashMap<>();
     private Map<String, Object> asyncObjectCache = new HashMap<>();
 
@@ -71,7 +74,7 @@ public class ProxyFactory {
             //负载均衡
             String targetServiceUrl = loadBalance.selectServiceAddress(serviceUrlList, rpcRequest);
             //封装Message
-            RpcMessage rpcMessage = new RpcMessage(MessageTypeEnum.REQUEST_TYPE, SerializerTypeEnum.getCode(serializer),
+            RpcMessage rpcMessage = new RpcMessage(MessageTypeEnum.REQUEST_TYPE, SerializerTypeEnum.getCode(AllConfig.Serializer),
                     (byte) 0, RpcConstants.REQUEST_ID.getAndIncrement(), rpcRequest);
             RpcResponse rpcResponse = null;
             rpcResponse = faultTolerantInvoker.doInvoke(nettyClient, rpcMessage, targetServiceUrl, isAsync);

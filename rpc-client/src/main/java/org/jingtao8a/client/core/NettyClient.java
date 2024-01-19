@@ -131,6 +131,7 @@ public class NettyClient {
      */
     @SneakyThrows
     public CompletableFuture<Channel> doConnect(CompletableFuture<Channel> completableFuture, InetSocketAddress inetSocketAddress, int retry) {
+        log.info("inetSocketAddress [{}]", inetSocketAddress.toString());
         bootstrap.connect(inetSocketAddress).addListener(future -> {
             if (future.isSuccess()) {
                 log.info("The client has connected [{}] successful!", inetSocketAddress.toString());

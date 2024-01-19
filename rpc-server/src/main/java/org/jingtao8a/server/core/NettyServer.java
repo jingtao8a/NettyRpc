@@ -1,5 +1,10 @@
 package org.jingtao8a.server.core;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class NettyServer {
     private NettyServerThread nettyServerThread;
     public NettyServer() {
