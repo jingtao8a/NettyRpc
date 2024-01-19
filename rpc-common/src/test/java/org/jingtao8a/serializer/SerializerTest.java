@@ -6,7 +6,7 @@ import org.jingtao8a.dto.*;
 import org.jingtao8a.serializer.kryo.KryoSerializer;
 import org.jingtao8a.serializer.hessian.HessianSerializer;
 import org.jingtao8a.serializer.protostuff.ProtostuffSerializer;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static org.jingtao8a.consts.enums.RpcResponseCodeEnum.SUCCESS;
 import static org.junit.Assert.assertEquals;

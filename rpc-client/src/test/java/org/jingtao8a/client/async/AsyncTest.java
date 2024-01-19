@@ -4,10 +4,6 @@ import org.jingtao8a.client.core.PendingRpcRequests;
 import org.jingtao8a.consts.enums.RpcResponseCodeEnum;
 import org.jingtao8a.dto.RpcResponse;
 import org.junit.Test;
-
-import java.util.concurrent.ExecutionException;
-
-import static org.junit.Assert.*;
 public class AsyncTest {
     @Test
     public void test1() {
