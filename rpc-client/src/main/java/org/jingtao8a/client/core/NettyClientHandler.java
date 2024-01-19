@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.jingtao8a.config.AllConfig;
 import org.jingtao8a.consts.RpcConstants;
 import org.jingtao8a.consts.enums.MessageTypeEnum;
 import org.jingtao8a.consts.enums.SerializerTypeEnum;
@@ -36,7 +37,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcMessage> 
             if (state == IdleState.WRITER_IDLE) {
                 RpcMessage rpcMessage = new RpcMessage();
                 rpcMessage.setMessageType(MessageTypeEnum.HEARTBEAT_REQUEST_TYPE);
-                rpcMessage.setSerializerType(SerializerTypeEnum.KRYO.getCode());
+                rpcMessage.setSerializerType(SerializerTypeEnum.getCode(AllConfig.Serializer));
                 rpcMessage.setCompress((byte)0);
                 rpcMessage.setBody(RpcConstants.PING);
                 channelHandlerContext.writeAndFlush(rpcMessage).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
