@@ -1,0 +1,2 @@
+fail-fast=org.jingtao8a.client.faultTolerantInvoker.FailFastInvoker
+retry=org.jingtao8a.client.faultTolerantInvoker.RetryInvoker
