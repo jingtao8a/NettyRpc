@@ -77,7 +77,7 @@ public class NettyClient {
                 }
             });
             // 直接返回空的数据体
-            rpcResponse = new RpcResponse(null, RpcResponseCodeEnum.SUCCESS.getCode(), RpcResponseCodeEnum.SUCCESS.getMessage(), null);
+            rpcResponse = new RpcResponse(requestId, RpcResponseCodeEnum.SUCCESS.getCode(), RpcResponseCodeEnum.SUCCESS.getMessage(), null);
         } catch (Exception e) {
             PendingRpcRequests.remove(requestId);
             throw new RpcException(RpcErrorMsgEnum.SERVICE_INVOCATION_FAILURE);
