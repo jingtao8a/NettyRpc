@@ -16,6 +16,7 @@ import org.jingtao8a.server.core.NettyServerThread;
 import org.jingtao8a.server.core.ServiceRegisterCache;
 import org.jingtao8a.server.invoke.Invoker;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +51,7 @@ public class RpcAutoConfiguration implements DisposableBean {
     public Register serviceDiscovery() {
         RegisterFactory registerFactory = ExtensionLoader.getExtensionLoader(RegisterFactory.class).getExtension(rpcConfig.getRegisterFactory());
         register = registerFactory.getRegister(rpcConfig.getRegisterAddress());
+        log.info("Register init");
         return register;
     }
 
@@ -57,44 +59,72 @@ public class RpcAutoConfiguration implements DisposableBean {
      * CLIENT
      */
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "client")
     public NettyClient nettyClient() {
         nettyClient = new NettyClient();
+        log.info("NettyClient init");
         return nettyClient;
     }
 
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "client")
     public FaultTolerantInvoker faultTolerantInvoker() {
         faultTolerantInvoker = ExtensionLoader.getExtensionLoader(FaultTolerantInvoker.class).getExtension(rpcConfig.getFaultTolerantInvoker());
+        log.info("FaultTolerantInvoker init");
         return faultTolerantInvoker;
     }
 
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "client")
     public LoadBalance loadBalance() {
         loadBalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getExtension(rpcConfig.getLoadBalance());
+        log.info("LoadBalance init");
         return loadBalance;
     }
 
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "client")
     public ProxyFactory proxyFactory() {
         proxyFactory = new ProxyFactory();
         proxyFactory.setNettyClient(nettyClient);
         proxyFactory.setLoadBalance(loadBalance);
         proxyFactory.setRegister(register);
         proxyFactory.setFaultTolerantInvoker(faultTolerantInvoker);
+        log.info("ProxyFactory init");
         return proxyFactory;
     }
 
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "client")
     public ProxyInjectProcessor proxyInjectProcessor() {
         ProxyInjectProcessor proxyInjectProcessor = new ProxyInjectProcessor();
         proxyInjectProcessor.setProxyFactory(proxyFactory);
+        log.info("ProxyInjectProcessor init");
         return proxyInjectProcessor;
     }
 
     /**
      * SERVER
      */
+
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "server")
+    public Invoker invoker() {
+        invoker = ExtensionLoader.getExtensionLoader(Invoker.class).getExtension(AllConfig.Invoker);
+        log.info("Invoker init");
+        return invoker;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "server")
+    public ServiceRegisterCache serviceRegisterCache() {
+        serviceRegisterCache = new ServiceRegisterCache();
+        log.info("ServiceRegisterCache init");
+        return serviceRegisterCache;
+    }
+
+    @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "server")
     public NettyServer nettyServer() {
         nettyServer = new NettyServer();
         NettyServerThread nettyServerThread = nettyServer.getNettyServerThread();
@@ -103,34 +133,28 @@ public class RpcAutoConfiguration implements DisposableBean {
         nettyServerThread.setServiceRegisterCache(serviceRegisterCache);
         InetSocketAddress serverAddress = new InetSocketAddress(rpcConfig.getServerIP(), rpcConfig.getServerPort());
         nettyServerThread.setServerAddress(serverAddress);
+        log.info("NettyServer init");
         return nettyServer;
     }
-
-    @Bean
-    public Invoker invoker() {
-        invoker = ExtensionLoader.getExtensionLoader(Invoker.class).getExtension(AllConfig.Invoker);
-        return invoker;
-    }
-
-    @Bean
-    public ServiceRegisterCache serviceRegisterCache() {
-        serviceRegisterCache = new ServiceRegisterCache();
-        return serviceRegisterCache;
-    }
-
     //注册服务
     @Bean
+    @ConditionalOnProperty(name = "nettyrpc.type", havingValue = "server")
     public ServiceInjectProcessor serviceInjectProcessor() {
         ServiceInjectProcessor serviceInjectProcessor = new ServiceInjectProcessor();
         serviceInjectProcessor.setServiceRegisterCache(serviceRegisterCache);
         serviceInjectProcessor.setNettyServer(nettyServer);
+        log.info("ServiceInjectProcessor init");
         return serviceInjectProcessor;
     }
 
     @Override
     public void destroy() throws Exception {
         register.stop();
-        nettyClient.stop();
-        nettyServer.stop();
+        if (nettyClient != null) {
+            nettyClient.stop();
+        }
+        if (nettyServer != null) {
+            nettyServer.stop();
+        }
     }
 }

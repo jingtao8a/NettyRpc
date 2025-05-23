@@ -18,6 +18,7 @@ public class ProxyInjectProcessor implements ApplicationListener<ContextRefreshe
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        log.info("ProxyInjectProcessor onApplication");
         // Spring 启动完毕会收到Event
         if (Objects.isNull(contextRefreshedEvent.getApplicationContext().getParent())) {
             ApplicationContext context = contextRefreshedEvent.getApplicationContext();

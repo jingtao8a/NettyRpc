@@ -39,3 +39,5 @@ build/
 .idea
 
 docs/zookeeper/data
+log
+logs_server

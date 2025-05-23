@@ -36,7 +36,7 @@ public class ZkRegister implements Register {
     public List<String> lookupService(String serviceKey) {
         //从注册中心拿到该rpcService下的所有server的Address
         List<String> serviceUrlList = CuratorUtils.getChildrenNodes(zkClient, serviceKey);
-        if (serviceUrlList.isEmpty()) {
+        if (serviceUrlList == null || serviceUrlList.isEmpty()) {
             throw new RpcException(RpcErrorMsgEnum.SERVICE_CAN_NOT_BE_FOUND, serviceKey);
         }
         return serviceUrlList;
