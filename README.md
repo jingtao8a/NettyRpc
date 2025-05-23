@@ -28,7 +28,7 @@
 - [ ] invoke: 反射调用请求，实现cglib
 
 ### another
-- [ ] 集成Spring和SpringBoot
+- [x] 集成Spring和SpringBoot
 - [ ] 编写更多测试
 
 
