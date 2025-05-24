@@ -41,3 +41,4 @@ build/
 docs/zookeeper/data
 log
 logs_server
+dependency-reduced-pom.xml
