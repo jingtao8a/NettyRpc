@@ -31,6 +31,8 @@
 - [x] 集成Spring和SpringBoot
 - [ ] 编写更多测试
 
+## UML类图
+[NettyRpc框架](https://az191bknb5.feishu.cn/docx/HKNRd5PESoWKgTxbpgUcHFednWb)
 
 ***
 参考项目：https://github.com/DongZhouGu/XRPC <br/>
