@@ -32,7 +32,10 @@
 - [ ] 编写更多测试
 
 ## UML类图
-[NettyRpc框架](https://az191bknb5.feishu.cn/docx/HKNRd5PESoWKgTxbpgUcHFednWb)
+[NettyRpc框架结构](https://az191bknb5.feishu.cn/docx/HKNRd5PESoWKgTxbpgUcHFednWb)
+
+## 性能测试
+[NettyRpc框架性能测试](https://az191bknb5.feishu.cn/docx/Xphbdyp7soWLAXxoEOfcji3unYe)
 
 ***
 参考项目：https://github.com/DongZhouGu/XRPC <br/>
