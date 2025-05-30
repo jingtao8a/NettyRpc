@@ -36,8 +36,8 @@ public class HelloController {
     }
     @GetMapping("/helloAsync")
     public String sayHelloAsync() {
-        helloServiceAsync.hello(new Hello("111", "222"));
         RpcContext.setCallback(new CustomResponseCallback());
+        helloServiceAsync.hello(new Hello("111", "222"));
         return "async call, please see the terminal!";
     }
 }
